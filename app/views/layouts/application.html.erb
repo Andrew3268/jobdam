@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jobdam</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"></link>
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="wrapper clearfix">
+        <div id="logo">
+          <%= link_to "JOBDAM", root_path %>
+        </div>
+        <nav>
+          <% if user_signed_in? %>
+            <%= link_to current_user.name, edit_user_registration_path %>
+            <%= link_to "Add New Post", new_post_path, class: "button" %>
+            <%= link_to "Log out", destroy_user_session_path, class: "button", method: :delete %>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path %>
+            <%= link_to "Sing Up", new_user_registration_path, class: "button" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+
+
+  	<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    
+    <div class="wrapper">
+    <%= yield %>
+    </div>
+
+  </body>
+</html>
