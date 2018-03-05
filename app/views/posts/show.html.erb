@@ -74,11 +74,16 @@
   <% @comments.each do |comment| %>
     <div class="comment">
       <p class="username">
-        <%= comment.user.name %>
+       Posted by <%= comment.user.name %> <%= time_ago_in_words(comment.created_at) %> ago
       </p>
       <p class="content">
         <%= comment.content %>
       </p>
+      <% if user_signed_in? %>
+       <% if comment.user_id == current_user.id %>
+        <%= link_to "Delete", post_comment_path(comment.post, comment), class: "button", method: :delete, data: { confirm: "Are  you sure?" } %>
+       <% end %>
+      <% end %>
     </div>
   <% end %>
   <%= render "comments/form" %>
